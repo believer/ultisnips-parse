@@ -6,11 +6,19 @@ import path from 'path'
 import { promisify } from 'util'
 import { allowCors } from '../utils/allowCors'
 
+interface Snippet {
+  body: string[]
+  description: string[]
+  options: string[]
+  prefix: string
+  title: string
+}
+
 const writeFile = promisify(fs.writeFile)
 const baseUrl =
   'https://raw.githubusercontent.com/believer/dotfiles/master/coc/ultisnips/'
 
-const getData = async (language: string | string[]) => {
+const getData = async (language: string | string[]): Promise<string> => {
   const response = await fetch(`${baseUrl}${language}.snippets`)
   const data = await response.text()
 
@@ -25,7 +33,7 @@ const getData = async (language: string | string[]) => {
 
 const handler = async (req: NowRequest, res: NowResponse) => {
   let line: Buffer | false
-  const snippets = []
+  const snippets: Snippet[] = []
   const { language } = req.query
 
   try {
@@ -49,11 +57,11 @@ const handler = async (req: NowRequest, res: NowResponse) => {
         }
 
         // Parse snippet start
-        const {
-          groups: { prefix, title, options },
-        } = line
+        const snippetStart = line
           .toString('ascii')
           .match(/^snippet\s(?<prefix>\w+)\s"(?<title>.+)"\s?(?<options>\w+)?$/)
+
+        const { prefix, title, options } = snippetStart?.groups ?? {}
 
         line = liner.next()
         const body = []
@@ -65,10 +73,10 @@ const handler = async (req: NowRequest, res: NowResponse) => {
         }
 
         snippets.push({
+          body,
           description,
           prefix,
           title,
-          body,
           options: options?.split(''),
         })
       }
@@ -80,4 +88,4 @@ const handler = async (req: NowRequest, res: NowResponse) => {
   }
 }
 
-module.exports = allowCors(handler)
+export default allowCors(handler)
