@@ -1,15 +1,16 @@
-const lineByLine = require('n-readlines')
-const fetch = require('node-fetch')
-const fs = require('fs')
-const { promisify } = require('util')
-const path = require('path')
-const { allowCors } = require('../utils/allowCors')
+import { NowRequest, NowResponse } from '@vercel/node'
+import fs from 'fs'
+import lineByLine from 'n-readlines'
+import fetch from 'node-fetch'
+import path from 'path'
+import { promisify } from 'util'
+import { allowCors } from '../utils/allowCors'
 
 const writeFile = promisify(fs.writeFile)
 const baseUrl =
   'https://raw.githubusercontent.com/believer/dotfiles/master/coc/ultisnips/'
 
-const getData = async (language) => {
+const getData = async (language: string | string[]) => {
   const response = await fetch(`${baseUrl}${language}.snippets`)
   const data = await response.text()
 
@@ -22,8 +23,8 @@ const getData = async (language) => {
   return data
 }
 
-const handler = async (req, res) => {
-  let line
+const handler = async (req: NowRequest, res: NowResponse) => {
+  let line: Buffer | false
   const snippets = []
   const { language } = req.query
 
