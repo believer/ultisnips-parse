@@ -1,0 +1,20 @@
+{
+  "name": "ultisnips-parse",
+  "version": "1.0.0",
+  "description": "Parse my [Ultisnips](https://github.com/SirVer/ultisnips) [snippet](https://github.com/believer/dotfiles/tree/master/coc/ultisnips) and display the nicely on the web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/believer/ultisnips-parse.git"
+  },
+  "keywords": [],
+  "author": "Rickard Natt och Dag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/believer/ultisnips-parse/issues"
+  },
+  "homepage": "https://github.com/believer/ultisnips-parse#readme"
+}
