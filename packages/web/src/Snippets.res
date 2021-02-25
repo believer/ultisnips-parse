@@ -19,7 +19,7 @@ external fetch: string => Promise.t<Response.t<array<snippet>>> = "fetch"
 let get = language => {
   open Promise
 
-  fetch(`https://ultisnips-parse.vercel.app/api?language=${language}`)
+  fetch(`https://snippets-parser.willcodefor.beer/api?language=${language}`)
   ->then(res => Response.json(res))
   ->then(data => resolve(data))
 }
