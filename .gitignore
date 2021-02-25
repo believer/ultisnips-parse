@@ -1,0 +1,24 @@
+# Dependencies
+node_modules
+
+# Logs
+*.log
+
+# env
+.env
+.bsb.lock
+
+# Distribution folders / generated files
+dist
+lib
+*.bs.js
+
+# IDE
+.merlin
+.vscode
+
+# Mac
+.DS_Store
+
+# Vercel
+.vercel

@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply font-normal m-0 p-0 text-gray-800;
+}
+
+.grid-snippets {
+  grid-template-columns: 200px 1fr;
+}
