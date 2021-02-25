@@ -11,6 +11,8 @@ let make = (~data: array<Snippets.snippet>) => {
       switch snippet {
       | None => React.null
       | Some({description, title, prefix, body, options}) =>
+        let optionsWithDefault = options->Js.Undefined.toOption->Belt.Option.getWithDefault([])
+
         <div className="mb-8 prose">
           <h2>
             {React.string(title)}
@@ -19,12 +21,12 @@ let make = (~data: array<Snippets.snippet>) => {
           <Lib.Markdown className="mb-8">
             {description->Belt.Array.joinWith("\n", v => v)}
           </Lib.Markdown>
-          {switch options->Belt.Array.length {
+          {switch optionsWithDefault->Belt.Array.length {
           | 0 => React.null
           | _ => <>
               <strong> {React.string("Options:")} </strong>
               <ul>
-                {options
+                {optionsWithDefault
                 ->Belt.Array.map(val => {
                   switch val->Ultisnips.Options.fromString->Ultisnips.Options.toString {
                   | Some(v) =>

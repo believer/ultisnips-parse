@@ -8,7 +8,7 @@ type response = {"token": Js.Nullable.t<string>, "error": Js.Nullable.t<string>}
 type snippet = {
   body: array<string>,
   description: array<string>,
-  options: array<string>,
+  options: Js.Undefined.t<array<string>>,
   prefix: string,
   title: string,
 }
