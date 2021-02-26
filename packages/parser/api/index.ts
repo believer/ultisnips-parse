@@ -77,7 +77,7 @@ const handler = async (req: NowRequest, res: NowResponse) => {
           description,
           prefix,
           title,
-          options: options?.split(''),
+          options: options?.split('') ?? [],
         })
       }
     }
