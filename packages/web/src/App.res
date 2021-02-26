@@ -1,6 +1,14 @@
 @react.component
 let make = () => {
-  let (language, setLanguage) = React.useState(() => "javascript")
+  let url = RescriptReactRouter.useUrl()
+  let (language, selectedSnippet) = switch Route.fromPath(url.path) {
+  | Home((Some(language), Some(snippet))) => (language, snippet)
+  | Home((Some(language), None)) => (language, "")
+  | Home((None, Some(snippet))) => ("javascript", snippet)
+  | Home((None, None))
+  | NotFoundRoute => ("javascript", "")
+  }
+
   let {data, isLoading} = ReactQuery.useQuery(["snippets", language], () => Snippets.get(language))
 
   <div className="max-w-xl mx-auto my-20 px-5 md:px-0">
@@ -11,7 +19,7 @@ let make = () => {
         appearance-none bg-transparent dark:border-coolGray-600"
         onChange={e => {
           let language = (e->ReactEvent.Form.target)["value"]
-          setLanguage(_ => language)
+          Route.go(Home((Some(language), None)))
         }}
         value={language}>
         <option value="elixir"> {React.string("Elixir")} </option>
@@ -32,7 +40,7 @@ let make = () => {
     </div>
     {switch (isLoading, Js.Undefined.toOption(data)) {
     | (true, _) => <div> {React.string("Loading")} </div>
-    | (false, Some(data)) => <SnippetSearch data />
+    | (false, Some(data)) => <SnippetSearch data selectedSnippet language />
     | (false, None) => <div> {React.string("No data")} </div>
     }}
   </div>

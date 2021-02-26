@@ -1,10 +1,12 @@
 @react.component
-let make = (~data: array<Snippets.snippet>) => {
-  let (query, setQuery) = React.useState(() => "")
+let make = (~data: array<Snippets.snippet>, ~language, ~selectedSnippet) => {
+  let selectSnippet = prefix => {
+    Route.go(Home(Some(language), Some(prefix)))
+  }
 
   <>
-    {switch query {
-    | "" => <div />
+    {switch selectedSnippet {
+    | "" => React.null
     | q =>
       let snippet = data->Js.Array2.find(({prefix}) => prefix == q)
 
@@ -56,11 +58,12 @@ let make = (~data: array<Snippets.snippet>) => {
               "mb-2 mr-2 px-4 py-2 text-left rounded focus:outline-none
               focus:ring-2 focus:ring-offset-2 focus:ring-pink-300
               dark:focus:ring-offset-coolGray-800",
+              switch prefix == selectedSnippet {
               | true => "bg-pink-600 text-white"
               | false => "bg-coolGray-600 text-coolGray-200"
               },
             })}
-            onClick={_ => setQuery(_ => prefix)}>
+            onClick={_ => selectSnippet(prefix)}>
             <div className="font-bold text-sm"> {React.string(prefix)} </div>
           </button>
         </li>
