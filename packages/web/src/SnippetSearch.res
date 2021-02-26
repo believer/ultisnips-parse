@@ -11,7 +11,7 @@ let make = (~data: array<Snippets.snippet>) => {
       switch snippet {
       | None => React.null
       | Some({description, title, prefix, body, options}) =>
-        <div className="mb-8 prose">
+        <div className="mb-20 prose dark:prose-dark">
           <h2>
             {React.string(title)}
             <span className="text-coolGray-400 ml-2 text-sm"> {React.string(`(${prefix})`)} </span>
@@ -44,7 +44,7 @@ let make = (~data: array<Snippets.snippet>) => {
         </div>
       }
     }}
-    <ul className="flex flex-wrap">
+    <ul className="flex flex-wrap justify-center">
       {data
       ->Belt.SortArray.stableSortBy((a, b) =>
         a.prefix->Js.String2.localeCompare(b.prefix)->Belt.Int.fromFloat
@@ -53,8 +53,9 @@ let make = (~data: array<Snippets.snippet>) => {
         <li key={title}>
           <button
             className={Cn.fromList(list{
-              "mb-2 mr-2 px-4 py-2 text-left rounded focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-300",
-              switch prefix == query {
+              "mb-2 mr-2 px-4 py-2 text-left rounded focus:outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-pink-300
+              dark:focus:ring-offset-coolGray-800",
               | true => "bg-pink-600 text-white"
               | false => "bg-coolGray-600 text-coolGray-200"
               },
