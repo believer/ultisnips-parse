@@ -55,9 +55,7 @@ let make = (~data: array<Snippets.snippet>, ~language, ~selectedSnippet) => {
         <li key={title}>
           <button
             className={Cn.fromList(list{
-              "mb-2 mr-2 px-4 py-2 text-left rounded focus:outline-none
-              focus:ring-2 focus:ring-offset-2 focus:ring-pink-300
-              dark:focus:ring-offset-coolGray-800",
+              "mb-2 mr-2 px-4 py-2 text-left rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-300 dark:focus:ring-offset-coolGray-800",
               switch prefix == selectedSnippet {
               | true => "bg-pink-600 text-white"
               | false => "bg-coolGray-600 text-coolGray-200"

@@ -15,8 +15,7 @@ let make = () => {
     <h1 className="text-6xl font-extrabold mb-12"> {React.string("Snippets")} </h1>
     <div className="relative mb-12">
       <select
-        className="border-2 border-coolGray-300 py-2 px-8 rounded-full w-full
-        appearance-none bg-transparent dark:border-coolGray-600"
+        className="border-2 border-coolGray-300 py-2 px-8 rounded-full w-full appearance-none bg-transparent dark:border-coolGray-600"
         onChange={e => {
           let language = (e->ReactEvent.Form.target)["value"]
           Route.go(Home((Some(language), None)))
