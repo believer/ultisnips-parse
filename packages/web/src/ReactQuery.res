@@ -16,4 +16,7 @@ type queryResponse<'a> = {
 }
 
 @module("react-query")
-external useQuery: (array<string>, unit => Promise.t<'a>) => queryResponse<'a> = "useQuery"
+external useArrayQuery: (array<string>, unit => Promise.t<'a>) => queryResponse<'a> = "useQuery"
+
+@module("react-query")
+external useQuery: (string, unit => Promise.t<'a>) => queryResponse<'a> = "useQuery"

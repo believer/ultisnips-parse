@@ -1,5 +1,5 @@
 @react.component
-let make = (~selectedSnippet, ~snippets: array<SnippetData.Snippet.t>) => {
+let make = (~selectedSnippet, ~snippets: array<Api.Snippet.t>) => {
   switch selectedSnippet {
   | "" => React.null
   | q =>

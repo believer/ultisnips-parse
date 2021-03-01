@@ -1,5 +1,5 @@
 @react.component
-let make = (~snippets: array<SnippetData.Snippet.t>, ~language, ~selectedSnippet) => {
+let make = (~snippets: array<Api.Snippet.t>, ~language, ~selectedSnippet) => {
   let selectSnippet = prefix => {
     Route.go(Home(Some(language), Some(prefix)))
   }

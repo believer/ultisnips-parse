@@ -1,5 +1,7 @@
 @react.component
 let make = (~language) => {
+  let languages = Api.Langauges.useLanguages()
+
   <div className="relative mb-12">
     <select
       className="border-2 border-coolGray-300 py-2 px-8 rounded-full w-full appearance-none bg-transparent dark:border-coolGray-600 focus:outline-none focus:ring-2 focus:ring-offset-4 dark:focus:ring-offset-coolGray-800 focus:ring-pink-300"
@@ -8,12 +10,16 @@ let make = (~language) => {
         Route.go(Home((Some(language), None)))
       }}
       value={language}>
-      <option value="elixir"> {React.string("Elixir")} </option>
-      <option value="elm"> {React.string("Elm")} </option>
-      <option value="rails"> {React.string("Ruby on Rails")} </option>
-      <option value="ruby"> {React.string("Ruby")} </option>
-      <option value="javascript"> {React.string("JavaScript")} </option>
-      <option value="snippets"> {React.string("Snippets")} </option>
+      {switch languages {
+      | Loading => React.string("Loading")
+      | NoData => React.string("No data")
+      | Data(languages) =>
+        languages
+        ->Belt.Array.map(({id, name}) => {
+          <option key={id} value={id}> {React.string(name)} </option>
+        })
+        ->React.array
+      }}
     </select>
     <div
       className="absolute inset-y-0 right-0 flex items-center px-8

@@ -11,7 +11,7 @@ let make = () => {
   | NotFoundRoute => (defaultLanguage, "")
   }
 
-  let snippets = SnippetData.useSnippets(language)
+  let snippets = Api.Snippets.useSnippets(language)
 
   <div className="max-w-xl mx-auto my-20 px-5 md:px-0">
     <h1 className="text-6xl font-extrabold mb-12"> {React.string("Snippets")} </h1>
