@@ -16,6 +16,4 @@ const handler = async (_req: NowRequest, res: NowResponse) => {
   res.json(languages)
 }
 
-handler({} as any, {} as any)
-
 export default allowCors(handler)
