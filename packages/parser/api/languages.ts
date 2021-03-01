@@ -24,20 +24,24 @@ const languageName = {
 }
 
 const handler = async (_req: NowRequest, res: NowResponse) => {
-  const response = await fetch(
-    'https://api.github.com/repos/believer/dotfiles/contents/coc/ultisnips'
-  )
-  const data: Snippet[] = await response.json()
-  const languages = data.map(({ name }) => {
-    const id = name.replace('.snippets', '') as keyof typeof languageName
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/believer/dotfiles/contents/coc/ultisnips'
+    )
+    const data: Snippet[] = await response.json()
+    const languages = (data ?? []).map(({ name }) => {
+      const id = name.replace('.snippets', '') as keyof typeof languageName
 
-    return {
-      id,
-      name: languageName[id] ?? id,
-    }
-  })
+      return {
+        id,
+        name: languageName[id] ?? id,
+      }
+    })
 
-  res.json(languages)
+    res.json(languages)
+  } catch (e) {
+    res.json([])
+  }
 }
 
 export default allowCors(handler)
