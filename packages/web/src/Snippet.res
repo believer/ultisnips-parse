@@ -49,7 +49,9 @@ ${optionsAsText}
             </>
           }}
           <pre className="text-xs relative">
-            <Lib.CopyToClipboard text={body->Js.Array2.joinWith("\n")}>
+            <Lib.CopyToClipboard
+              text={body->Js.Array2.joinWith("\n")}
+              onCopy={_ => Lib.HotToast.make->Lib.HotToast.success("Snippet copied!")}>
               <button
                 className="absolute top-2 right-2 bg-green-300 text-green-900 px-2 py-1 rounded text-sm shadow-sm hover:ring-2 hover:ring-offset-2 hover:ring-green-200 dark:hover:ring-offset-coolGray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-200 dark:focus:ring-offset-coolGray-800">
                 {React.string("Copy")}
