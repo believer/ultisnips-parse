@@ -18,7 +18,7 @@ const languageName = {
   rescript: 'ReScript',
   ruby: 'Ruby',
   rust: 'Rust',
-  snippets: 'Ultisnips snippets',
+  snippets: 'UltiSnips snippets',
   typescript: 'TypeScript',
   typescriptreact: 'TypeScript React',
 }
