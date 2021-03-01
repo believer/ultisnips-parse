@@ -1,3 +1,13 @@
+let renderers: Lib.Markdown.Renderers.t = {
+  link: data => {
+    switch data.href->Js.String2.split("/")->Js.Array2.filter(v => v !== "") {
+    | [language, snippet] =>
+      <Route.Link to_={Route.Home((Some(language), Some(snippet)))}> {data.children} </Route.Link>
+    | _ => <a href={data.href}> {data.children} </a>
+    }
+  },
+}
+
 @react.component
 let make = (~selectedSnippet, ~snippets: array<Api.Snippet.t>) => {
   switch selectedSnippet {
@@ -24,7 +34,9 @@ let make = (~selectedSnippet, ~snippets: array<Api.Snippet.t>) => {
             {React.string(title)}
             <span className="text-coolGray-400 ml-2 text-sm"> {React.string(`(${prefix})`)} </span>
           </h2>
-          <Lib.Markdown className="mb-8"> {description->Js.Array2.joinWith("\n")} </Lib.Markdown>
+          <Lib.Markdown className="mb-8" renderers>
+            {description->Js.Array2.joinWith("\n")}
+          </Lib.Markdown>
           {switch options->Belt.Array.length {
           | 0 => React.null
           | _ => <>

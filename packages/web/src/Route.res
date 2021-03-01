@@ -20,3 +20,17 @@ let toPath = route =>
   }
 
 let go = path => path->toPath->RescriptReactRouter.push
+
+let handleLinkClick = (to_, e) => {
+  ReactEvent.Mouse.preventDefault(e)
+  go(to_)
+}
+
+module Link = {
+  @react.component
+  let make = (~className="", ~to_, ~children) => {
+    let href = toPath(to_)
+
+    <a className href onClick={handleLinkClick(to_)}> children </a>
+  }
+}
