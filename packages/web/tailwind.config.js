@@ -73,10 +73,10 @@ module.exports = {
   variants: {
     typography: ['dark'],
     extend: {
-      ringWidth: ['hover'],
-      ringOffsetWidth: ['hover'],
-      ringColor: ['hover'],
-      ringOffsetColor: ['hover'],
+      ringWidth: ['hover', 'group-hover'],
+      ringOffsetWidth: ['hover', 'group-hover'],
+      ringColor: ['hover', 'group-hover'],
+      ringOffsetColor: ['hover', 'group-hover'],
     },
   },
   plugins: [require('@tailwindcss/typography')],

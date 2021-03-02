@@ -32,7 +32,7 @@ let make = (~data: Api.Snippet.t) => {
   let {body} = data
 
   <div className="mb-20">
-    <div className="bg-coolGray-600 rounded-t">
+    <div className="text-white bg-coolGray-700 rounded-t">
       {switch display {
       | Code =>
         <pre className="py-4 pl-4 pr-8 text-sm overflow-x-auto">
@@ -83,7 +83,7 @@ let make = (~data: Api.Snippet.t) => {
     </div>
     <div className="bg-coolGray-900 rounded-b flex justify-end p-2 gap-x-4 items-center">
       <button
-        className="text-gray-500 w-6 h-6 focus:ring-2 focus:ring-offset-2 focus:ring-green-200 focus:outline-none focus:ring-offset-coolGray-900 rounded"
+        className="text-gray-500 w-6 h-6 focus:ring-2 focus:ring-offset-2 focus:ring-green-200 focus:outline-none dark:focus:ring-offset-coolGray-900 rounded hover:ring-offset-2 hover:ring-2 hover:ring-green-200 hover:ring-offset-coolGray-900"
         onClick={_ =>
           setDisplay(_ =>
             switch display {
