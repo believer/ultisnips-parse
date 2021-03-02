@@ -1,3 +1,2 @@
-require("./index.css");
-require("./Index.bs");
-
+import './index.css'
+import './Index.bs'
