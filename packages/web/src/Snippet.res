@@ -17,7 +17,7 @@ let make = (~selectedSnippet, ~snippets: array<Api.Snippet.t>) => {
 
     switch snippet {
     | None => React.null
-    | Some({description, title, prefix, body, options}) =>
+    | Some({description, title, prefix, options} as data) =>
       let optionsAsText =
         options
         ->Js.Array2.map(val => {
@@ -29,7 +29,7 @@ let make = (~selectedSnippet, ~snippets: array<Api.Snippet.t>) => {
         ->Js.Array2.joinWith("\n")
 
       <>
-        <div className="mb-20 prose dark:prose-dark">
+        <div className="mb-8 prose dark:prose-dark">
           <h2>
             {React.string(title)}
             <span className="text-coolGray-400 ml-2 text-sm"> {React.string(`(${prefix})`)} </span>
@@ -48,18 +48,8 @@ ${optionsAsText}
               </Lib.Markdown>
             </>
           }}
-          <pre className="text-xs relative">
-            <Lib.CopyToClipboard
-              text={body->Js.Array2.joinWith("\n")}
-              onCopy={_ => Lib.HotToast.make->Lib.HotToast.success("Snippet copied!")}>
-              <button
-                className="absolute top-2 right-2 bg-green-300 text-green-900 px-2 py-1 rounded text-sm shadow-sm hover:ring-2 hover:ring-offset-2 hover:ring-green-200 dark:hover:ring-offset-coolGray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-200 dark:focus:ring-offset-coolGray-800">
-                {React.string("Copy")}
-              </button>
-            </Lib.CopyToClipboard>
-            <code> {React.string(body->Js.Array2.joinWith("\n"))} </code>
-          </pre>
         </div>
+        <SnippetCode data />
       </>
     }
   }

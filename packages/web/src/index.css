@@ -2,11 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  @apply font-normal m-0 p-0 text-gray-800 dark:bg-coolGray-800 dark:text-coolGray-100;
+@layer base {
+  html,
+  body {
+    @apply font-normal m-0 p-0 text-gray-800 dark:bg-coolGray-800 dark:text-coolGray-100;
+  }
 }
 
-.grid-snippets {
-  grid-template-columns: 200px 1fr;
+@layer components {
+  .grid-snippets {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .sibling-focus:focus ~ div {
+    @apply ring-2 ring-offset-2 ring-pink-300 ring-offset-coolGray-800 hover:ring-2 hover:ring-offset-2 hover:ring-pink-300 hover:ring-offset-coolGray-800;
+  }
 }
