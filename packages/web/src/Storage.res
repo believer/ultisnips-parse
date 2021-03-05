@@ -1,6 +1,5 @@
 @val @scope("localStorage") external setItem: (string, string) => unit = "setItem"
 @val @scope("localStorage") external getItem: string => Js.Nullable.t<string> = "getItem"
-@val @scope("localStorage") external removeItem: string => unit = "removeItem"
 
 module type Config = {
   type t
@@ -12,12 +11,12 @@ module type Config = {
 
 module Make = (Config: Config) => {
   let useLocalStorage = () => {
-    let internalKey = `snippets-${Config.key}`
-    let (state, setState) = React.useState(() => getItem(internalKey))
+    let key = `snippets-${Config.key}`
+    let (state, setState) = React.useState(() => getItem(key))
 
     let setValue = value => {
-      setItem(internalKey, value->Config.toString)
-      setState(_ => getItem(internalKey))
+      setItem(key, value->Config.toString)
+      setState(_ => getItem(key))
     }
 
     (state->Js.Nullable.toOption->Config.fromString, setValue)
